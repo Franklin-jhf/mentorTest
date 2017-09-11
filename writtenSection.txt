@@ -2,27 +2,103 @@ Answer each question in a written format
 
 1. What does semantic HTML mean?
 
+  Semantic HTML refers to HTML tag names that clearly describe their content. The tag name by itself is concise and easily defines what part of the web page it is.
+
+  Semantic HTML tags:
+    <section>, <header>, <article>, <form>
+
+  NON-semantic HTML tags:
+    <div>, <span>
+
 2. What is the box model?
+
+  The box model is a CSS design pattern that governs the total space that a page element occupies. Each element is represented as a rectangular box with four different layers. The four layers starting from the center is:
+
+    content   ->    padding    ->    border    ->    margin 
+
+  The content is either text or nested child elements, which are also more ‘boxes’.
+  The padding is distance from the content to the border.
+  The border is basically a frame, assuming its width is not excessively larger than the padding or margin. It stands between the outer  edge of the padding and inner edge of the margin. The border has several properties like thickness, style, color, and radius.
+  Lastly, the margin surrounds the entirety of the box and defines how far the element is from any other element in web page.
+
+  There are a special properties of boxes to take into account
+
+  Overflow:
+    If the size of a box is set with absolute values, the overflow property determines how the web page displays the element if the content is larger than the box size. A developer could choose to display the element within the box with a scroll bar, display the overflowing element in its entirety, or hide the outlying element areas.
+
+  Box-sizing:
+    Box-sizing tells the browser what the sizing properties of elements should includes. As the default property value, ‘content-box’ includes only the content as the box. On the other hand, ‘border-box’ includes content, padding, and border as the box. This means an element that is given a fixed size will fill up that entire space with the outer edge of the margin being contained.
 
 3. What is the difference between IDs and Classes?
 
+  Both IDs and classes are assigned to HTML tags so that they can be identified and manipulated through the DOM.
+  IDs are unique and should be specific to only one element. A good tag to use an ID on would be an input tag.
+  Classes are meant to be reused across multiple elements. A good tag to use a class on would be an li tag (list item).
+
 4. What does the z-index do?
+
+  The z-index is a CSS property that specifies the ‘z-order’ of an element and its children. When elements overlap, the z-index determines which element will be visible. The element with the larger z-index will be visible.
+  The default value of the z-index is ‘auto’. This means that if two elements are overlapping and have the same z-index, the element that is defined closer to the bottom of the HTML file is going to be shown.
 
 5. Summarize what the keyword 'this' is used for?
 
+  When used, the keyword 'this' refers to the object or scope that it currently is in. 
+  In an the context of an object constructor function, 'this' would refer to the object itself. For instance, if you were to create a new instance of an object, you would be able to set the that object's key value using the 'this' keyword. Here's an example of a Car constructor function:
+
+    var Car = function(make, model, year) {
+      this.make = make;
+      this.model = model;
+      this.year = year;
+    }
+
+  If you were to create a new car object through this function, 'this' allows you to pass in parameters that are assigned to the key value names that are defined in the function.
+
+  In the context of the whole Javascript script (outside of any functions), if you were to use the keyword 'this', it would refer to window object, which is also known as the 'global object.' 
+
+  The scope of 'this' could be manipulated through the call, bind, and apply method.
+
 6. What is a callback?
 
+  A callback is a function that is passed into another function. The callback is invoked to carry out some action or procedure. 
+  In array methods, callbacks are integral to their functions. For instance, the filter method allows you to loop through a function and return a new array based on what the callback function returns.
+
+  var evenNumsOnly = arrOfNums.filter( function(num) {
+    return num % 2 === 0;
+  })
+
+  In the example above, the filter method's callback function returns a boolean value based on if the number is even or not. As the method loops through an array of numbers, it checks to see if the callback's return value is true or false. If it's true, then the value is included as part of a new array to be returned. 
+  Callbacks are a necessary concept for programmers to utilize in their business logic of applications.
+
 7. What is a closure?
+  A closure is a function within a function. The closure function has access to its own scope, the parent function's scope, and the global scope. 
+  The closure maintains reference to the variables that are set inside the parent function.
 
 8. How does prototype work?
+  Prototypes allow for objects to have common methods and properties. Objects with the same prototype have access to the data set prescribed to that prototype.
+  For instance, all string variables in JavaScript are of the String prototype object. As a result, all strings have the same properties, like the length property which specifies the amount of characters in a string, the same methods, like toUpperCase method, and wrapper methods, like String.prototype.bold().
 
 9. What is MVC?
+  MVC stands for 'model-view-controller', which is a concept that describes the structure of user interfaces. 
+  Model represents the data stored in the application.
+  View represents the visual aspect of the program. It takes in data from the model and displays it to the end user.
+  Controller represents the part of the application that has the business logic and functions to manipulate the model.
+  The implementation of MVC allows for efficient code reuse and parallel development. 
 
 10. What is the component lifecycle?
+  The component lifecycle describes how components in React.js are created, updated, and removed from the DOM.
+
 
 11. What is REST?
+  REST stands for Representational State Transfer and is a design concept for managing state information. The notion of REST is treating data that can be created, destroyed, modified, or viewed using a stateless communication protocol.
 
 12. Name three ways of getting data from the URL using express
+  1. req.query
+    appears in URL as "?queryProp=queryVal"
+  2. req.params
+    appears in URL as "/paramVal"
+  3. get request
+    a simple get request at a certain URL. "app.get('/api/url', someFunc)"
+
 
 create table users (
 id serial,
@@ -34,8 +110,20 @@ email varchar(255)
 
 -Get all users:
 
+  SELECT * FROM users;
+
+
 -Create a new user with the name of 'your name' and an email of 'fake@fake.com':
+
+  INSERT_INTO users (name, email)
+  VALUES('your name', 'fake@fake.com')
+
 
 -Update the newly created user's name to 'Bobby Boy':
 
+  UPDATE users SET name = 'Bobby Boy' WHERE email = 'fake@fake.com'
+
+
 -Delete the newly updated user:
+  
+  DELETE FROM users WHERE email = "fake@fake.com"
